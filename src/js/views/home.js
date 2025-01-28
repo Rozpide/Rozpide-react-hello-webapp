@@ -50,16 +50,17 @@ export const Home = () => {
           <li key={index} className="list-group-item d-flex justify-content-between">
             <div>
               <h5>{item.name}</h5>
+              <p>{item.address}</p>
               <p>{item.phone}</p>
               <p>{item.email}</p>
-              <p>{item.address}</p>
+              
             </div>
             <div className="ml-auto d-flex">
-              <Link to="/add-contact" className="btn btn-primary btn-sm mr-2">
+              <Link to="/add-contact" className="btn btn-primary btn-sm mr-2 boton-editar">
                 <i className="fas fa-pencil-alt"></i>
               </Link>
               <button
-                className="btn btn-danger btn-sm"
+                className="btn btn-danger btn-sm boton-eliminar"
                 onClick={() => handleDelete(item.id)}
               >
                 <i className="fas fa-trash-alt"></i>
