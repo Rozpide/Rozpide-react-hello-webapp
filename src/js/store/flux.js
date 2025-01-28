@@ -141,21 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error('Error al actualizar contacto:', error);
                 });
             },
-            eliminarContacto: (id) => {
-                fetch(`https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts/${id}`, {
-                    method: 'DELETE',
-                })
-                .then(response => {
-                    if (response.ok) {
-                        getActions().obtenerContactos();
-                    } else {
-                        throw new Error('Error al eliminar contacto: ' + response.statusText);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error al eliminar contacto:', error);
-                });
-            }
+            
         }
     };
 };
