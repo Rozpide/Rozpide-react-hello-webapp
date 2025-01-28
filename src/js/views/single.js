@@ -6,17 +6,17 @@ import { Context } from "../store/appContext";
 export const Single = () => {
     const { store } = useContext(Context);
     const params = useParams();
-    const contacto = store.contactos.find(contacto => contacto.id === parseInt(params.theid));
+    const contact = store.contacts.find(contact => contact.id === parseInt(params.theid));
 
     return (
         <div className="jumbotron">
             <h1 className="display-4">Detalles del Contacto</h1>
-            {contacto ? (
+            {contact ? (
                 <>
-                    <p><strong>Nombre:</strong> {contacto.nombre}</p>
-                    <p><strong>Teléfono:</strong> {contacto.telefono}</p>
-                    <p><strong>Correo Electrónico:</strong> {contacto.correo}</p>
-                    <p><strong>Dirección:</strong> {contacto.direccion}</p>
+                    <p><strong>Nombre:</strong> {contact.nombre}</p>
+                    <p><strong>Teléfono:</strong> {contact.telefono}</p>
+                    <p><strong>Correo Electrónico:</strong> {contact.correo}</p>
+                    <p><strong>Dirección:</strong> {contact.direccion}</p>
                 </>
             ) : (
                 <p>Contacto no encontrado.</p>
