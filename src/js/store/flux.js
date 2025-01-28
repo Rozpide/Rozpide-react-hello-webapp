@@ -79,21 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 throw error; // Propagar el error para que pueda ser capturado en la interfaz
               });
           },
-        /*deleteContact: (contactID) => {
-          const requestOption = {
-            method: 'DELETE',
-            redirect: 'follow'
-          };
-          return fetch(`https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts/${contactID}`, requestOption)
-            .then((response) => response.json())
-            .then((result) => {
-              console.log(result);
-              return getActions().obtenerContactos(); // Refrescar la lista de contactos después de eliminar uno
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-            });
-        },*/
+       
         loadSomeData: () => {
           return fetch('https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts')
             .then(response => {

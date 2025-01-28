@@ -54,6 +54,9 @@ export const Home = () => {
               <p>{item.email}</p>
               <p>{item.address}</p>
             </div>
+            <Link to="/add-contact" className="btn btn-primary">
+                Editar contacto
+            </Link>
             <button
               className="btn btn-danger"
               onClick={() => actions.deleteContact(item.id)}
