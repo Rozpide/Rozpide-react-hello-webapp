@@ -21,9 +21,11 @@ export const AddContact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    actions.agregarContacto(contact);
-    navigate("/");
-  };
+    actions.agregarContacto(contact).then(() => {navigate("/"); 
+  }).catch((error) => {
+    console.error("ERROR AL AGREGAR CONTACTO!", error);
+  });
+  }
 
   return (
     <div className="container mt-5">

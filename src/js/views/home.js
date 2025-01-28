@@ -7,18 +7,24 @@ import "../../styles/home.css";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-  const [contact, setContact] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    address: ""
-  });
+  
 
   
  /*useEffect(() => {
-    actions.obtenerContactos();
+    actions.obtenerContactos()
+  }, []);*/
+  useEffect(() => {
+    actions.obtenerContactos()
+      .then(() => {
+        console.log('Contactos obtenidos correctamente.');
+      })
+      .catch(err => {
+        console.error('Error al obtener contactos:', err);
+      });
   }, []);
- */
+  if (!Array.isArray(store.contacts)) {
+    return <p>Error: La lista de contactos no es un array.</p>;
+  }
 
   return (
     <div className="text-center mt-5">
