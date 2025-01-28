@@ -54,15 +54,17 @@ export const Home = () => {
               <p>{item.email}</p>
               <p>{item.address}</p>
             </div>
-            <Link to="/add-contact" className="btn btn-primary">
-                Editar contacto
-            </Link>
-            <button
-              className="btn btn-danger"
-              onClick={() => actions.deleteContact(item.id)}
-            >
-              Borrar contacto
-            </button>
+            <div className="ml-auto d-flex">
+              <Link to="/add-contact" className="btn btn-primary btn-sm mr-2">
+                <i className="fas fa-pencil-alt"></i>
+              </Link>
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => handleDelete(item.id)}
+              >
+                <i className="fas fa-trash-alt"></i>
+              </button>
+            </div>
           </li>
         ))}
       </ul>
