@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import getState from "./flux.js";
 
 export const Context = React.createContext(null);

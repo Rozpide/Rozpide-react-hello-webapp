@@ -1,4 +1,6 @@
-import React, { useState, useContext } from "react";
+
+import React, { useState, useContext, useEffect} from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
@@ -12,66 +14,42 @@ export const Home = () => {
     address: ""
   });
 
-  const handleChange = (e) => {
-    setContact({
-      ...contact,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    actions.agregarContacto(contact);
-    setContact({ name: "", phone: "", email: "", address: "" }); // Resetear el formulario
-  };
+  
+ /*useEffect(() => {
+    actions.obtenerContactos();
+  }, []);
+ */
 
   return (
-    <>
-      <div className="text-center mt-5">
-        <h1>Hello Rigo!</h1>
-        <p>
-          <img src={rigoImage} />
-        </p>
-        <a href="#" className="btn btn-success">
-          If you see this green button, bootstrap is working
-        </a>
-        <p>
-          <button onClick={actions.changeText}>Cambiar texto</button>
-        </p>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={contact.name}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone"
-              value={contact.phone}
-              onChange={handleChange}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={contact.email}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={contact.address}
-              onChange={handleChange}
-            />
-            <button type="submit">Agregar Contacto</button>
-          </form>
-        </div>
-      </div>
-    </>
+    <div className="text-center mt-5">
+      <h1>Hello Rigo!</h1>
+      <p>
+        <img src={rigoImage} alt="Rigo" />
+      </p>
+      <p>
+        <Link to="/add-contact" className="btn btn-success">
+          Add New Contact
+        </Link>
+      </p>
+      
+      <ul className="list-group mt-5">
+        {store.contacts.map((item, index) => (
+          <li key={index} className="list-group-item d-flex justify-content-between">
+            <div>
+              <h5>{item.name}</h5>
+              <p>{item.phone}</p>
+              <p>{item.email}</p>
+              <p>{item.address}</p>
+            </div>
+            <button
+              className="btn btn-danger"
+              onClick={() => actions.deleteContact(item.id)}
+            >
+              Borrar contacto
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };

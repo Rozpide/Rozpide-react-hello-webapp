@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/demo.css";
@@ -6,19 +6,18 @@ import "../../styles/demo.css";
 export const Demo = () => {
   const { store, actions } = useContext(Context);
 
-  function deleteItem(indexToDelete){
-    
-  }
+  useEffect(() => {
+    actions.obtenerContactos();
+  }, []);
 
   return (
     <div className="container">
       <ul className="list-group">
-        {store.contact.map((item, index) => {
+        {store.contacts.map((item, index) => {
           return (
             <li
               key={index}
               className="list-group-item d-flex justify-content-between"
-              style={{ background: item.background }}
             >
               <h5>{item.name}</h5>
               <p>{item.phone}</p>
@@ -26,7 +25,7 @@ export const Demo = () => {
               <p>{item.address}</p>
               <button
                 className="btn btn-danger"
-                onClick={() => actions.deleteContact(index)}
+                onClick={() => actions.deleteContact(item.id)}
               >
                 Borrar contacto
               </button>
@@ -41,3 +40,4 @@ export const Demo = () => {
     </div>
   );
 };
+
