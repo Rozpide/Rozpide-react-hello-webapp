@@ -31,22 +31,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               });
           },
 
-        /*obtenerContactos: () => {
-          return fetch('https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts')
-            .then(response => {
-              if (response.ok) {
-                return response.json();
-              } else {
-                throw new Error('Error al obtener contactos: ' + response.statusText);
-              }
-            })
-            .then(data => {
-              setStore({ contacts: data });
-            })
-            .catch(error => {
-              console.error('Error al obtener contactos:', error);
-            });
-        },*/
+       
         agregarContacto: (contact) => {
           console.log('Enviando datos de contacto:', contact);
           return fetch('https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts', {
@@ -69,6 +54,32 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
         },
         deleteContact: (contactID) => {
+            const requestOption = {
+              method: 'DELETE',
+              redirect: 'follow'
+            };
+            // Eliminar localmente del store
+            const updatedContacts = getStore().contacts.filter(contact => contact.id !== contactID);
+            setStore({ contacts: updatedContacts });
+            return fetch(`https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts/${contactID}`, requestOption)
+              .then((response) => {
+                if (response.ok) {
+                  return response.json();
+                } else {
+                  throw new Error('Error al eliminar contacto: ' + response.statusText);
+                }
+              })
+              .then((result) => {
+                console.log('Contacto eliminado:', result);
+                // Opción adicional de volver a obtener contactos si es necesario
+                // return getActions().obtenerContactos(); 
+              })
+              .catch((error) => {
+                console.error('Error al eliminar contacto:', error);
+                throw error; // Propagar el error para que pueda ser capturado en la interfaz
+              });
+          },
+        /*deleteContact: (contactID) => {
           const requestOption = {
             method: 'DELETE',
             redirect: 'follow'
@@ -82,7 +93,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             .catch((error) => {
               console.error('Error:', error);
             });
-        },
+        },*/
         loadSomeData: () => {
           return fetch('https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts')
             .then(response => {

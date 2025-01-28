@@ -9,10 +9,6 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
   
 
-  
- /*useEffect(() => {
-    actions.obtenerContactos()
-  }, []);*/
   useEffect(() => {
     actions.obtenerContactos()
       .then(() => {
@@ -22,6 +18,17 @@ export const Home = () => {
         console.error('Error al obtener contactos:', err);
       });
   }, []);
+
+  const handleDelete = (id) => {
+    actions.deleteContact(id)
+      .then(() => {
+        console.log('Contacto eliminado correctamente:', id);
+      })
+      .catch(err => {
+        console.error('Error al eliminar contacto:', err);
+      });
+  };
+
   if (!Array.isArray(store.contacts)) {
     return <p>Error: La lista de contactos no es un array.</p>;
   }
