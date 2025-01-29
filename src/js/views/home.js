@@ -65,15 +65,15 @@ export const Home = () => {
 
   return (
     <div className="text-center mt-5">
-      <h1>Contact List</h1>
+      <h1>Add a new contact</h1>
       
-      {/*<p>
-        <Link to="/add-contact" className="btn btn-success">
-          Add New Contact
+      <div className="mt- d-flex justify-content-end">
+        <Link to="/add-contact" className="btn btn-success ml-auto mb-n3">
+          Add new contact
         </Link>
-      </p>*/}
+      </div>
       
-      <ul className="list-group mt-5">
+      <ul className="list-group mt-3">
         {store.contacts.map((item, index) => (
           <li key={index} className="list-group-item d-flex justify-content-between">
             <div>
