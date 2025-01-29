@@ -64,7 +64,7 @@ export const Home = () => {
   }
 
   return (
-    <div className="text-center mt-5">
+    <div className=" container-fluid text-center mt-5 custom-container">
       <h1>Add a new contact</h1>
       
       <div className="mt- d-flex justify-content-end">
