@@ -9,9 +9,18 @@ const capitalizeWords = (str) => {
   return str.replace(/\b\w/g, char => char.toUpperCase());
 };
 const formatPhoneNumber = (phone) => {
-  if (phone.length !== 10) return phone; // Asegúrate de que el número de teléfono tenga 10 dígitos
-  return `(${phone.substring(0, 3)}) ${phone.substring(3, 6)}-${phone.substring(6)}`;
+  const cleaned = phone.replace(/\D/g, ''); // Remueve cualquier carácter no numérico
+
+  if (cleaned.length <= 3) {
+    return `(${cleaned})`;
+  } else if (cleaned.length <= 6) {
+    return `(${cleaned.substring(0, 3)}) ${cleaned.substring(3)}`;
+  } else {
+    return `(${cleaned.substring(0, 3)}) ${cleaned.substring(3, 6)}-${cleaned.substring(6)}`;
+  }
 };
+
+
 
 
 export const Home = () => {
