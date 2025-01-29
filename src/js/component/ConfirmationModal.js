@@ -13,7 +13,7 @@ const ConfirmationModal = ({ show, handleClose, handleConfirm }) => {
           Cancel
         </Button>
         <Button variant="primary" onClick={handleConfirm}>
-          Delete
+          Oh No!
         </Button>
       </Modal.Footer>
     </Modal>
