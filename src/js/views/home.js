@@ -40,32 +40,24 @@ export const Home = () => {
         console.error('Error al obtener contactos:', err);
       });
   }, []);
-  const handleDeleteClick = (contactId) => { // <--- Añadir esta línea
-    setContactToDelete(contactId); // <--- Añadir esta línea
-    setShowModal(true); // <--- Añadir esta línea
-  }; // <--- Añadir esta línea
+  const handleDeleteClick = (contactId) => { 
+    setContactToDelete(contactId); 
+    setShowModal(true); 
+  }; 
 
-  const handleConfirmDelete = () => { // <--- Añadir esta línea
-    actions.deleteContact(contactToDelete) // <--- Añadir esta línea
-      .then(() => { // <--- Añadir esta línea
-        console.log('Contacto eliminado correctamente:', contactToDelete); // <--- Añadir esta línea
-        setShowModal(false); // <--- Añadir esta línea
-        setContactToDelete(null); // <--- Añadir esta línea
-      }) // <--- Añadir esta línea
-      .catch(err => { // <--- Añadir esta línea
-        console.error('Error al eliminar contacto:', err); // <--- Añadir esta línea
-      }); // <--- Añadir esta línea
-  }; // <--- Añadir esta línea
+  const handleConfirmDelete = () => { 
+    actions.deleteContact(contactToDelete) 
+      .then(() => { 
+        console.log('Contacto eliminado correctamente:', contactToDelete); 
+        setShowModal(false);
+        setContactToDelete(null); 
+      }) 
+      .catch(err => { 
+        console.error('Error al eliminar contacto:', err); 
+      }); 
+  }; 
 
- /* const handleDelete = (id) => {
-    actions.deleteContact(id)
-      .then(() => {
-        console.log('Contacto eliminado correctamente:', id);
-      })
-      .catch(err => {
-        console.error('Error al eliminar contacto:', err);
-      });
-  };*/
+
 
   if (!Array.isArray(store.contacts)) {
     return <p>Error: La lista de contactos no es un array.</p>;
@@ -73,15 +65,13 @@ export const Home = () => {
 
   return (
     <div className="text-center mt-5">
-      <h1>Hello Rigo!</h1>
-      <p>
-        <img src={rigoImage} alt="Rigo" />
-      </p>
-      <p>
+      <h1>Contact List</h1>
+      
+      {/*<p>
         <Link to="/add-contact" className="btn btn-success">
           Add New Contact
         </Link>
-      </p>
+      </p>*/}
       
       <ul className="list-group mt-5">
         {store.contacts.map((item, index) => (
@@ -94,12 +84,12 @@ export const Home = () => {
               <div className="d-flex align-items-center mb-3"><i className="fas fa-envelope me-3"></i> {capitalizeWords(item.email)}</div>
               
             </div>
-            <div className="ml-auto d-flex">
-              <Link to="/add-contact" className="btn btn-primary btn-sm mr-2 boton-editar">
+            <div className="ml-auto d-flex p-2">
+              <Link to="/add-contact" className="btn  btn-sm  boton-editar">
                 <i className="fas fa-pencil-alt"></i>
               </Link>
               <button
-                className="btn btn-danger btn-sm boton-eliminar"
+                className="btn  btn-sm boton-eliminar ms-2 delete-button"
                 onClick={() => handleDeleteClick(item.id)}
               >
                 <i className="fas fa-trash-alt"></i>

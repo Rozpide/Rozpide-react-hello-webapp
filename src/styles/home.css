@@ -11,3 +11,10 @@ h5, p {
   text-transform: none;
   display: block;
 }
+.delete-button {
+  border: none;
+}
+
+.delete-button:hover {
+  border: 1px solid #8a8787; /* Color del borde al pasar el puntero por encima */
+}
