@@ -1,3 +1,6 @@
 /* 
     General Styles
 */
+h5, p {
+    text-transform: none; /* Asegura que el texto no se transforme automáticamente a mayúsculas */
+  }

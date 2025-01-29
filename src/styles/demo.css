@@ -1,0 +1,6 @@
+.boton-save {
+    margin-top: 100px;
+}
+h5, p {
+    text-transform: none; /* Asegura que el texto no se transforme automáticamente a mayúsculas */
+  }

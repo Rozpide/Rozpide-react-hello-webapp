@@ -78,7 +78,7 @@ export const AddContact = () => {
           <label htmlFor="email">Email</label>
           <input
             type="email"
-            className="form-control"
+            className="form-control mb-3"
             id="email"
             name="email"
             placeholder="Enter email"
@@ -89,9 +89,9 @@ export const AddContact = () => {
         </div>
         <button type="submit"  className="btn btn-primary w-100" style={{ width: '1295px' }} >Save</button>
       </form>
-      <div className="mt-3 text-center">
+      <div className="mt-3 text-left">
         <Link to="/">
-          <span className="text-primary">or get back to contacts</span>
+          <span className="text-primary ms-0">or get back to contacts</span>
         </Link>
       </div>
     </div>

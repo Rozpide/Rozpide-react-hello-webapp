@@ -49,10 +49,11 @@ export const Home = () => {
         {store.contacts.map((item, index) => (
           <li key={index} className="list-group-item d-flex justify-content-between">
             <div>
-              <h5>{item.name}</h5>
-              <p>{item.address}</p>
-              <p>{item.phone}</p>
-              <p>{item.email}</p>
+              <h4>{item.name}</h4>
+              <div className="contact-detail"><i className="fas fa-user"></i> {item.name}</div>
+              <div className="contact-detail"><i className="fas fa-map-marker-alt"></i> {item.address}</div>
+              <div className="contact-detail"><i className="fas fa-phone"></i> {item.phone}</div>
+              <div className="contact-detail"><i className="fas fa-envelope"></i> {item.email}</div>
               
             </div>
             <div className="ml-auto d-flex">

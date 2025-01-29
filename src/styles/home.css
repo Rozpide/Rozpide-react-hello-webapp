@@ -7,3 +7,7 @@
   cursor: pointer;
   height: 20%;
 }
+h5, p {
+  text-transform: none;
+  display: block;
+}
