@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+import ConfirmationModal from "../component/ConfirmationModal";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const capitalizeWords = (str) => {
   return str.replace(/\b\w/g, char => char.toUpperCase());
 };
 const formatPhoneNumber = (phone) => {
-  const cleaned = phone.replace(/\D/g, ''); // Remueve cualquier carácter no numérico
+  // Remueve cualquier carácter no numérico del teléfono
+  const cleaned = phone.replace(/\D/g, '');
 
   if (cleaned.length <= 3) {
-    return `(${cleaned})`;
+    return cleaned;
   } else if (cleaned.length <= 6) {
     return `(${cleaned.substring(0, 3)}) ${cleaned.substring(3)}`;
   } else {
@@ -22,9 +25,10 @@ const formatPhoneNumber = (phone) => {
 
 
 
-
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  const [showModal, setShowModal] = useState(false);
+  const [contactToDelete, setContactToDelete] = useState(null)
   
 
   useEffect(() => {
@@ -36,8 +40,24 @@ export const Home = () => {
         console.error('Error al obtener contactos:', err);
       });
   }, []);
+  const handleDeleteClick = (contactId) => { // <--- Añadir esta línea
+    setContactToDelete(contactId); // <--- Añadir esta línea
+    setShowModal(true); // <--- Añadir esta línea
+  }; // <--- Añadir esta línea
 
-  const handleDelete = (id) => {
+  const handleConfirmDelete = () => { // <--- Añadir esta línea
+    actions.deleteContact(contactToDelete) // <--- Añadir esta línea
+      .then(() => { // <--- Añadir esta línea
+        console.log('Contacto eliminado correctamente:', contactToDelete); // <--- Añadir esta línea
+        setShowModal(false); // <--- Añadir esta línea
+        setContactToDelete(null); // <--- Añadir esta línea
+      }) // <--- Añadir esta línea
+      .catch(err => { // <--- Añadir esta línea
+        console.error('Error al eliminar contacto:', err); // <--- Añadir esta línea
+      }); // <--- Añadir esta línea
+  }; // <--- Añadir esta línea
+
+ /* const handleDelete = (id) => {
     actions.deleteContact(id)
       .then(() => {
         console.log('Contacto eliminado correctamente:', id);
@@ -45,7 +65,7 @@ export const Home = () => {
       .catch(err => {
         console.error('Error al eliminar contacto:', err);
       });
-  };
+  };*/
 
   if (!Array.isArray(store.contacts)) {
     return <p>Error: La lista de contactos no es un array.</p>;
@@ -80,7 +100,7 @@ export const Home = () => {
               </Link>
               <button
                 className="btn btn-danger btn-sm boton-eliminar"
-                onClick={() => handleDelete(item.id)}
+                onClick={() => handleDeleteClick(item.id)}
               >
                 <i className="fas fa-trash-alt"></i>
               </button>
@@ -88,6 +108,12 @@ export const Home = () => {
           </li>
         ))}
       </ul>
+
+      <ConfirmationModal
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        handleConfirm={handleConfirmDelete}/> 
+
     </div>
   );
 };
