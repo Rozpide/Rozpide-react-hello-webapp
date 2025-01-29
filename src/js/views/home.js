@@ -5,6 +5,15 @@ import { Context } from "../store/appContext";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
+const capitalizeWords = (str) => {
+  return str.replace(/\b\w/g, char => char.toUpperCase());
+};
+const formatPhoneNumber = (phone) => {
+  if (phone.length !== 10) return phone; // Asegúrate de que el número de teléfono tenga 10 dígitos
+  return `(${phone.substring(0, 3)}) ${phone.substring(3, 6)}-${phone.substring(6)}`;
+};
+
+
 export const Home = () => {
   const { store, actions } = useContext(Context);
   
@@ -49,11 +58,11 @@ export const Home = () => {
         {store.contacts.map((item, index) => (
           <li key={index} className="list-group-item d-flex justify-content-between">
             <div>
-              <h4>{item.name}</h4>
-              <div className="contact-detail"><i className="fas fa-user"></i> {item.name}</div>
-              <div className="contact-detail"><i className="fas fa-map-marker-alt"></i> {item.address}</div>
-              <div className="contact-detail"><i className="fas fa-phone"></i> {item.phone}</div>
-              <div className="contact-detail"><i className="fas fa-envelope"></i> {item.email}</div>
+              <h4 className="d-flex align-items-center mb-3">{capitalizeWords(item.name)}</h4>
+              <div className="d-flex align-items-center mb-3"><i className="fas fa-user me-3"></i>  {capitalizeWords(item.name)}</div>
+              <div className="d-flex align-items-center mb-3"><i className="fas fa-map-marker-alt me-3"></i> {capitalizeWords(item.address)}</div>
+              <div className="d-flex align-items-center mb-3"><i className="fas fa-phone me-3"></i> {formatPhoneNumber(item.phone)}</div>
+              <div className="d-flex align-items-center mb-3"><i className="fas fa-envelope me-3"></i> {capitalizeWords(item.email)}</div>
               
             </div>
             <div className="ml-auto d-flex">
