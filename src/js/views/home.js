@@ -81,8 +81,8 @@ export const Home = () => {
   }
 
   return (
-    <div className="text-center mt-5">
-      <h1>Hello Rigo!</h1>
+    <div className="container mt-5">
+      <h1 className="text-center">Hello Rigo!</h1>
       {selectedContact ? (
         <ContactCard
           contact={selectedContact}
@@ -91,19 +91,16 @@ export const Home = () => {
         />
       ) : (
         <>
-          <p>
-            <img src={rigoImage} alt="Rigo" />
-          </p>
-          <p>
-            <Link to="/add-contact" className="btn btn-success">
+          <div className="d-flex justify-content-end mb-3">
+            <Link to="/add-contact" className="btn btn-success me-0">
               Add New Contact
             </Link>
-          </p>
+          </div>
           <ul className="list-group mt-5">
             {store.contacts.map((item, index) => (
               <li
                 key={index}
-                className="list-group-item d-flex justify-content-between align-items-center"
+                className="list-group-item d-flex justify-content-between"
               >
                 <div className="d-flex align-items-center">
                   <StarWarsAvatar id={item.id} />
@@ -126,15 +123,17 @@ export const Home = () => {
                     </div>
                   </div>
                 </div>
-                <div className="ml-auto d-flex p-2">
+                <div className="position-absolute top-0 end-0 d-flex mt-2 me-2">
                   <button
                     onClick={() => handleEditClick(item)}
-                    className="btn btn-sm btn-primary me-2"
+                    className="btn btn-sm text-dark p-1 border-0 bg-transparent mt-0 me-4"
+                    style={{ border: "none" }}
                   >
                     <i className="fas fa-pencil-alt"></i>
                   </button>
                   <button
-                    className="btn btn-sm btn-danger ms-2"
+                    className="btn btn-sm text-dark p-1 border-0 bg-transparent mt-0"
+                    style={{ border: "none" }}
                     onClick={() => handleDeleteClick(item.id)}
                   >
                     <i className="fas fa-trash-alt"></i>
