@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ContactCard = ({ contact, onSave, onDelete }) => {
   const [editableContact, setEditableContact] = useState(contact);
@@ -13,7 +14,7 @@ const ContactCard = ({ contact, onSave, onDelete }) => {
   const handleChange = (e) => {
     setEditableContact({
       ...editableContact,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -80,9 +81,15 @@ const ContactCard = ({ contact, onSave, onDelete }) => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100 mb-3">Save</button>
+          <button type="submit" className="btn btn-primary w-100 mb-3">
+            Save
+          </button>
         </form>
-        <button onClick={() => onDelete(contact.id)} className="btn btn-danger w-100">Delete</button>
+        <div className="text-left">
+          <Link to="/">
+            <span className="text-primary">or get back to contacts</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -91,7 +98,7 @@ const ContactCard = ({ contact, onSave, onDelete }) => {
 ContactCard.propTypes = {
   contact: PropTypes.object.isRequired,
   onSave: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default ContactCard;
