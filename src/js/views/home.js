@@ -82,7 +82,7 @@ export const Home = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center">Hello Rigo!</h1>
+      
       {selectedContact ? (
         <ContactCard
           contact={selectedContact}

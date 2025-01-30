@@ -29,7 +29,7 @@ const StarWarsAvatar = ({ id }) => {
       {error ? (
         <div>Error al cargar avatar</div>
       ) : avatar ? (
-        <img src={avatar} alt="Avatar" className="me-2 rounded-circle" style={{ width: '50px', height: '50px' }} />
+        <img src={avatar} alt="Avatar" className="me-2 rounded-circle" style={{ width: '80px', height: '80px' }} />
       ) : (
         <i className="fas fa-spinner fa-spin"></i>
       )}
