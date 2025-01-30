@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { number } from "prop-types";
 
 export const AddContact = () => {
   const { actions } = useContext(Context);
