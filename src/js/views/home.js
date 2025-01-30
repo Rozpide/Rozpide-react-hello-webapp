@@ -3,22 +3,26 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import ContactCard from "../component/ContactCard";
 import ConfirmationModal from "../component/ConfirmationModal";
+import StarWarsAvatar from "../component/StarWarsAvatar";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
 const capitalizeWords = (str) => {
-  return str.replace(/\b\w/g, char => char.toUpperCase());
+  return str.replace(/\b\w/g, (char) => char.toUpperCase());
 };
 
 const formatPhoneNumber = (phone) => {
-  const cleaned = phone.replace(/\D/g, ''); // Remueve cualquier carácter no numérico
+  const cleaned = phone.replace(/\D/g, ""); // Remueve cualquier carácter no numérico
 
   if (cleaned.length <= 3) {
     return `(${cleaned})`;
   } else if (cleaned.length <= 6) {
     return `(${cleaned.substring(0, 3)}) ${cleaned.substring(3)}`;
   } else {
-    return `(${cleaned.substring(0, 3)}) ${cleaned.substring(3, 6)}-${cleaned.substring(6)}`;
+    return `(${cleaned.substring(0, 3)}) ${cleaned.substring(
+      3,
+      6
+    )}-${cleaned.substring(6)}`;
   }
 };
 
@@ -29,12 +33,13 @@ export const Home = () => {
   const [selectedContact, setSelectedContact] = useState(null);
 
   useEffect(() => {
-    actions.obtenerContactos()
+    actions
+      .obtenerContactos()
       .then(() => {
-        console.log('Contactos obtenidos correctamente:', store.contacts);
+        console.log("Contactos obtenidos correctamente:", store.contacts);
       })
-      .catch(err => {
-        console.error('Error al obtener contactos:', err);
+      .catch((err) => {
+        console.error("Error al obtener contactos:", err);
       });
   }, []);
 
@@ -48,28 +53,30 @@ export const Home = () => {
   };
 
   const handleConfirmDelete = () => {
-    actions.deleteContact(contactToDelete)
+    actions
+      .deleteContact(contactToDelete)
       .then(() => {
-        console.log('Contacto eliminado correctamente:', contactToDelete);
+        console.log("Contacto eliminado correctamente:", contactToDelete);
         setShowModal(false);
         setContactToDelete(null);
       })
-      .catch(err => {
-        console.error('Error al eliminar contacto:', err);
+      .catch((err) => {
+        console.error("Error al eliminar contacto:", err);
       });
   };
 
   const handleSave = (updatedContact) => {
-    return actions.actualizarContacto(updatedContact.id, updatedContact)
+    return actions
+      .actualizarContacto(updatedContact.id, updatedContact)
       .then(() => {
-        console.log('Contacto actualizado correctamente:', updatedContact);
+        console.log("Contacto actualizado correctamente:", updatedContact);
         setSelectedContact(null); // Limpiar selección después de guardar
         return actions.obtenerContactos(); // Obtener contactos actualizados
       });
   };
 
   if (!Array.isArray(store.contacts)) {
-    console.error('store.contacts no es un array:', store.contacts);
+    console.error("store.contacts no es un array:", store.contacts);
     return <p>Error: La lista de contactos no es un array.</p>;
   }
 
@@ -77,7 +84,11 @@ export const Home = () => {
     <div className="text-center mt-5">
       <h1>Hello Rigo!</h1>
       {selectedContact ? (
-        <ContactCard contact={selectedContact} onSave={handleSave} onDelete={handleDeleteClick} />
+        <ContactCard
+          contact={selectedContact}
+          onSave={handleSave}
+          onDelete={handleDeleteClick}
+        />
       ) : (
         <>
           <p>
@@ -90,23 +101,36 @@ export const Home = () => {
           </p>
           <ul className="list-group mt-5">
             {store.contacts.map((item, index) => (
-              <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <div className="d-flex align-items-center mb-2">
-                    <i className="fas fa-user me-2"></i> {capitalizeWords(item.name)}
-                  </div>
-                  <div className="d-flex align-items-center mb-2">
-                    <i className="fas fa-map-marker-alt mr-2 me-2"></i> {capitalizeWords(item.address)}
-                  </div>
-                  <div className="d-flex align-items-center mb-2">
-                    <i className="fas fa-phone mr-2 me-2"></i> {formatPhoneNumber(item.phone)}
-                  </div>
-                  <div className="d-flex align-items-center mb-2">
-                    <i className="fas fa-envelope mr-2 me-2"></i> {capitalizeWords(item.email)}
+              <li
+                key={index}
+                className="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <div className="d-flex align-items-center">
+                  <StarWarsAvatar id={item.id} />
+                  <div>
+                    <div className="d-flex align-items-center mb-2">
+                      <i className="fas fa-user me-3"></i>{" "}
+                      {capitalizeWords(item.name)}
+                    </div>
+                    <div className="d-flex align-items-center mb-2">
+                      <i className="fas fa-map-marker-alt mr-2 me-3"></i>{" "}
+                      {capitalizeWords(item.address)}
+                    </div>
+                    <div className="d-flex align-items-center mb-2">
+                      <i className="fas fa-phone mr-2 me-3"></i>{" "}
+                      {formatPhoneNumber(item.phone)}
+                    </div>
+                    <div className="d-flex align-items-center mb-2">
+                      <i className="fas fa-envelope mr-2 me-3"></i>{" "}
+                      {capitalizeWords(item.email)}
+                    </div>
                   </div>
                 </div>
                 <div className="ml-auto d-flex p-2">
-                  <button onClick={() => handleEditClick(item)} className="btn btn-sm btn-primary me-2">
+                  <button
+                    onClick={() => handleEditClick(item)}
+                    className="btn btn-sm btn-primary me-2"
+                  >
                     <i className="fas fa-pencil-alt"></i>
                   </button>
                   <button
