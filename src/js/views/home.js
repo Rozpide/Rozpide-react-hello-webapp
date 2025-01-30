@@ -93,16 +93,16 @@ export const Home = () => {
               <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
                 <div>
                   <div className="d-flex align-items-center mb-2">
-                    <i className="fas fa-user mr-2"></i> {capitalizeWords(item.name)}
+                    <i className="fas fa-user me-2"></i> {capitalizeWords(item.name)}
                   </div>
                   <div className="d-flex align-items-center mb-2">
-                    <i className="fas fa-map-marker-alt mr-2"></i> {capitalizeWords(item.address)}
+                    <i className="fas fa-map-marker-alt mr-2 me-2"></i> {capitalizeWords(item.address)}
                   </div>
                   <div className="d-flex align-items-center mb-2">
-                    <i className="fas fa-phone mr-2"></i> {formatPhoneNumber(item.phone)}
+                    <i className="fas fa-phone mr-2 me-2"></i> {formatPhoneNumber(item.phone)}
                   </div>
                   <div className="d-flex align-items-center mb-2">
-                    <i className="fas fa-envelope mr-2"></i> {capitalizeWords(item.email)}
+                    <i className="fas fa-envelope mr-2 me-2"></i> {capitalizeWords(item.email)}
                   </div>
                 </div>
                 <div className="ml-auto d-flex p-2">
