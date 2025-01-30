@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { number } from "prop-types";
 
 export const AddContact = () => {
   const { actions } = useContext(Context);
@@ -9,35 +10,44 @@ export const AddContact = () => {
     name: "",
     email: "",
     phone: "",
-    address: "",
+    address: ""
   });
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams(); // Obtener el ID del contacto
 
   useEffect(() => {
     if (id) {
       // Llamar a la API para obtener los datos del contacto
-      fetch(
-        `https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts/${id}`
-      )
-        .then((response) => {
+      fetch(`https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts/${id}`)
+        .then(response => {
           if (response.ok) {
             return response.json();
           } else {
-            throw new Error("Error al cargar contacto: " + response.statusText);
+            throw new Error("Error al cargar contacto:1 " + response.statusText);
           }
         })
-        .then((data) => {
-          setContact({
-            name: data.full_name,
-            email: data.email,
-            phone: data.phone,
-            address: data.address,
-          });
+        .then(data => {
+          console.log("Datos del contacto recibidos:", data); // Verificar datos del contacto
+          if (data && data.name) { 
+
+            setContact({ 
+
+              name: data.name, 
+
+              email: data.email, 
+
+              phone: data.phone, 
+
+              address: data.address 
+
+            }); 
+          } else {
+            throw new Error("Formato de datos del contacto no válido");
+          }
         })
-        .catch((error) => {
-          console.error("Error al cargar el contacto:", error);
-          alert("Hubo un problema al cargar los datos del contacto.");
+        .catch(error => {
+          console.error("Error al cargar el contacto:2", error);
+          alert("Hubo un problema al cargar los datos del contactoA.");
           navigate("/");
         });
     }
@@ -46,46 +56,38 @@ export const AddContact = () => {
   const handleChange = (e) => {
     setContact({
       ...contact,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
       // Actualizar contacto existente
-      actions
-        .actualizarContacto(id, contact)
+      actions.actualizarContacto(id, contact)
         .then(() => {
           navigate("/");
         })
         .catch((err) => {
-          console.error("Error al actualizar contacto:", err);
+          console.error("Error al actualizar contacto:3", err);
+          alert("Hubo un problema al actualizar el contacto3.");
         });
     } else {
       // Agregar nuevo contacto
-      actions
-        .agregarContacto(contact)
+      actions.agregarContacto(contact)
         .then(() => {
           navigate("/");
         })
         .catch((err) => {
-          console.error("Error al agregar contacto:", err);
+          console.error("Error al agregar contacto:4", err);
+          alert("Hubo un problema al agregar el contacto.4");
         });
     }
   };
 
-  /*const handleSubmit = (e) => {
-    e.preventDefault();
-    actions.agregarContacto(contact).then(() => {navigate("/"); 
-  }).catch((error) => {
-    console.error("ERROR AL AGREGAR CONTACTO!", error);
-  });
-  }*/
-
   return (
     <div className="container mt-5">
       <h1 className="text-center">{id ? "Edit Contact" : "Add a new contact"}</h1>
-
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Full Name</label>
@@ -100,7 +102,6 @@ export const AddContact = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="address">Address</label>
           <input
@@ -114,7 +115,6 @@ export const AddContact = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="phone">Phone</label>
           <input
@@ -128,7 +128,6 @@ export const AddContact = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -145,11 +144,10 @@ export const AddContact = () => {
         <button type="submit" className="btn btn-primary w-100 mb-3">
           {id ? "Update Contact" : "Save"}
         </button>
-        
       </form>
-      <div className="mt-3 text-left">
+      <div className="text-left">
         <Link to="/">
-          <span className="text-primary ms-0">or get back to contacts</span>
+          <span className="text-primary">or get back to contacts</span>
         </Link>
       </div>
     </div>
