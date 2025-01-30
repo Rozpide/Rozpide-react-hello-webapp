@@ -82,7 +82,6 @@ export const Home = () => {
 
   return (
     <div className="container mt-5">
-      
       {selectedContact ? (
         <ContactCard
           contact={selectedContact}
@@ -147,6 +146,11 @@ export const Home = () => {
             handleClose={() => setShowModal(false)}
             handleConfirm={handleConfirmDelete}
           />
+          <div className="text-left mt-3">
+            <Link to="/">
+              <span className="text-primary">or get back to contacts</span>
+            </Link>
+          </div>
         </>
       )}
     </div>
