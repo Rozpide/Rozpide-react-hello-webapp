@@ -79,6 +79,9 @@ export const Home = () => {
     console.error("store.contacts no es un array:", store.contacts);
     return <p>Error: La lista de contactos no es un array.</p>;
   }
+  const handleLinkClick = () => {
+    navigate("/");
+  };
 
   return (
     <div className="container mt-5">
@@ -146,7 +149,7 @@ export const Home = () => {
             handleClose={() => setShowModal(false)}
             handleConfirm={handleConfirmDelete}
           />
-          <div className="text-left mt-3">
+          <div className="text-left mt-3" onClick={handleLinkClick}>
             <Link to="/">
               <span className="text-primary">or get back to contacts</span>
             </Link>
