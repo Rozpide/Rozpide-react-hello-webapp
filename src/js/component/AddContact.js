@@ -1,44 +1,44 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Context } from "../store/appContext";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";//importar useState, useContext, useEffect desde react 
+import { Context } from "../store/appContext";//importar Context desde appContext
+import { useNavigate, useParams, Link } from "react-router-dom";//importar useNavigate, useParams, Link desde react-router-dom
 
-export const AddContact = () => {
-  const { store, actions } = useContext(Context);
-  const [contact, setContact] = useState({
+export const AddContact = () => { //exportar AddContact
+  const { store, actions } = useContext(Context);//almacenar store, actions en useContext(Context)
+  const [contact, setContact] = useState({//almacenar contact, setContact en useState
     name: "",
     email: "",
     phone: "",
     address: ""
   });
-  const navigate = useNavigate();
-  const { id } = useParams();
+  const navigate = useNavigate();//almacenar navigate en useNavigate
+  const { id } = useParams();//almacenar id en useParams
 
   useEffect(() => {
     if (id) {
       // Intentar encontrar el contacto en el store si existe
-      const existingContact = store.contacts.find(contact => contact.id === parseInt(id));
-      if (existingContact) {
-        setContact(existingContact);
-      } else {
-        console.error("Contacto no encontrado");
+      const existingContact = store.contacts.find(contact => contact.id === parseInt(id));//almacenar existingContact en store.contacts.find
+      if (existingContact) {//si existingContact es verdadero 
+        setContact(existingContact);//establecer existingContact en setContact
+      } else {//sino
+        console.error("Contacto no encontrado");//mostrar en consola "Contacto no encontrado"
         alert("El contacto no existe.");
-        navigate("/");
+        navigate("/");// y navegar a "/"
       }
     }
-  }, [id, store.contacts, navigate]);
+  }, [id, store.contacts, navigate]);//si id, store.contacts, navigate cambian ejecutar useEffect 
 
-  const handleChange = (e) => {
+  const handleChange = (e) => {//definir handleChange con e como parametro 
     setContact({
-      ...contact,
-      [e.target.name]: e.target.value
+      ...contact,//almacenar contact en setContact 
+      [e.target.name]: e.target.value //almacenar e.target.value en [e.target.name] 
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (id) {
-      actions.actualizarContacto(id, contact)
-        .then(() => navigate("/"))
+  const handleSubmit = (e) => {//definir handleSubmit con e como parametro
+    e.preventDefault();//prevenir comportamiento por defecto 
+    if (id) {//si id es verdadero 
+      actions.actualizarContacto(id, contact)//ejecutar actions.actualizarContacto con id, contact como parametros  
+        .then(() => navigate("/"))// y navegar a "/"
         .catch((err) => {
           console.error("Error al actualizar contacto", err);
           alert("Hubo un problema al actualizar el contacto.");
