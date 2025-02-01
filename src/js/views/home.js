@@ -167,7 +167,6 @@ export const Home = () => {
 
 export default Home;
 */
-
 import React, { useEffect, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -200,11 +199,10 @@ export const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [contactToDelete, setContactToDelete] = useState(null);
   const [selectedContact, setSelectedContact] = useState(null);
-  const navigate = useNavigate(); // <== IMPORTANTE: Definir navigate aquí usando useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
-    actions
-      .obtenerContactos()
+    actions.obtenerContactos()
       .then(() => {
         console.log("Contactos obtenidos correctamente:", store.contacts);
       })
@@ -216,7 +214,7 @@ export const Home = () => {
   const handleEditClick = (contact) => {
     console.log("Contacto seleccionado:", contact);
     setSelectedContact(contact);
-    navigate(`/edit-contact/`); // <== IMPORTANTE: Asegúrate de que la URL incluye el ID del contacto
+    navigate(`/edit-contact/${contact.id}`);
   };
 
   const handleDeleteClick = (contactId) => {
@@ -225,8 +223,7 @@ export const Home = () => {
   };
 
   const handleConfirmDelete = () => {
-    actions
-      .deleteContact(contactToDelete)
+    actions.deleteContact(contactToDelete)
       .then(() => {
         console.log("Contacto eliminado correctamente:", contactToDelete);
         setShowModal(false);
@@ -238,8 +235,7 @@ export const Home = () => {
   };
 
   const handleSave = (updatedContact) => {
-    return actions
-      .actualizarContacto(updatedContact.id, updatedContact)
+    return actions.actualizarContacto(updatedContact.id, updatedContact)
       .then(() => {
         console.log("Contacto actualizado correctamente:", updatedContact);
         setSelectedContact(null); // Limpiar selección después de guardar
@@ -256,7 +252,7 @@ export const Home = () => {
     <div className="container mt-5">
       {selectedContact ? (
         <ContactCard
-          contact={selectedContact} // <== IMPORTANTE: Asegúrate de pasar la prop contact correctamente
+          contact={selectedContact}
           onSave={handleSave}
           onDelete={handleDeleteClick}
         />
@@ -330,4 +326,3 @@ export const Home = () => {
 };
 
 export default Home;
-

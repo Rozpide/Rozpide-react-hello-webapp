@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 
 export const AddContact = () => {
   const { actions } = useContext(Context);
@@ -11,46 +10,38 @@ export const AddContact = () => {
     phone: "",
     address: ""
   });
-  const navigate = useNavigate();// Navegación programática en React Router DOM 
-  const { id } = useParams(); // Obtener el ID del contacto
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
     if (id) {
-      // Llamar a la API para obtener los datos del contacto
       fetch(`https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts/${id}`)
         .then(response => {
           if (response.ok) {
             return response.json();
           } else {
-            throw new Error("Error al cargar contacto:1 " + response.statusText);
+            throw new Error("Error al cargar contacto: " + response.statusText);
           }
         })
         .then(data => {
-          console.log("Datos del contacto recibidos:", data); // Verificar datos del contacto
-          if (data && data.name) { 
-
-            setContact({ 
-
-              name: data.name, 
-
-              email: data.email, 
-
-              phone: data.phone, 
-
-              address: data.address 
-
-            }); 
+          if (data && data.name) {
+            setContact({
+              name: data.name,
+              email: data.email,
+              phone: data.phone,
+              address: data.address
+            });
           } else {
             throw new Error("Formato de datos del contacto no válido");
           }
         })
         .catch(error => {
-          console.error("Error al cargar el contacto:2", error);
-          alert("Hubo un problema al cargar los datos del contactoA.");
+          console.error("Error al cargar el contacto", error);
+          alert("Hubo un problema al cargar los datos del contacto.");
           navigate("/");
         });
     }
-  }, [id]);
+  }, [id, navigate]);
 
   const handleChange = (e) => {
     setContact({
@@ -62,24 +53,18 @@ export const AddContact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      // Actualizar contacto existente
       actions.actualizarContacto(id, contact)
-        .then(() => {
-          navigate("/");
-        })
+        .then(() => navigate("/"))
         .catch((err) => {
-          console.error("Error al actualizar contacto:3", err);
-          alert("Hubo un problema al actualizar el contacto3.");
+          console.error("Error al actualizar contacto", err);
+          alert("Hubo un problema al actualizar el contacto.");
         });
     } else {
-      // Agregar nuevo contacto
       actions.agregarContacto(contact)
-        .then(() => {
-          navigate("/");
-        })
+        .then(() => navigate("/"))
         .catch((err) => {
-          console.error("Error al agregar contacto:4", err);
-          alert("Hubo un problema al agregar el contacto.4");
+          console.error("Error al agregar contacto", err);
+          alert("Hubo un problema al agregar el contacto.");
         });
     }
   };
@@ -101,7 +86,7 @@ export const AddContact = () => {
             required
           />
         </div>
-        <div className="form-group ">
+        <div className="form-group">
           <label htmlFor="address">Address</label>
           <input
             type="text"
@@ -146,9 +131,11 @@ export const AddContact = () => {
       </form>
       <div className="text-left">
         <Link to="/">
-          <span className="text-primary">AddContacor get back to contacts Este es el que funciona AddContact</span>
+          <span className="text-primary">or get back to contacts</span>
         </Link>
       </div>
     </div>
   );
 };
+
+export default AddContact;

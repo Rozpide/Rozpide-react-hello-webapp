@@ -8,7 +8,7 @@ export const Demo = () => {
 
   useEffect(() => {
     actions.obtenerContactos();
-  }, []);
+  }, [actions]);
 
   return (
     <div className="container">
@@ -40,4 +40,5 @@ export const Demo = () => {
     </div>
   );
 };
+
 

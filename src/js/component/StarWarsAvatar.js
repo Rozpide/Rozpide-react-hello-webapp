@@ -27,6 +27,8 @@ const StarWarsAvatar = ({ id }) => {
   return (
     <div className="d-flex align-items-center">
       {error ? (
+
+        
         <div>Error al cargar avatar</div>
       ) : avatar ? (
         <img src={avatar} alt="Avatar" className="me-2 rounded-circle" style={{ width: '80px', height: '80px' }} />
