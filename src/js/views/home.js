@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import { Context } from "../store/appContext";
 import ContactCard from "../component/ContactCard";
 import ConfirmationModal from "../component/ConfirmationModal";
@@ -45,6 +46,7 @@ export const Home = () => {
 
   const handleEditClick = (contact) => {
     setSelectedContact(contact);
+    navigate(`/edit-contact/${contact.id}`);
   };
 
   const handleDeleteClick = (contactId) => {
@@ -130,7 +132,8 @@ export const Home = () => {
                     onClick={() => handleEditClick(item)}
                     className="btn btn-sm text-dark p-1 border-0 bg-transparent mt-0 me-4"
                     style={{ border: "none" }}
-                  >
+                  > 
+                    <Link to={`/edit-contact/${item.id}`}></Link>
                     <i className="fas fa-pencil-alt"></i>
                   </button>
                   <button
@@ -149,7 +152,7 @@ export const Home = () => {
             handleClose={() => setShowModal(false)}
             handleConfirm={handleConfirmDelete}
           />
-          <div className="text-left mt-3" onClick={handleLinkClick}>
+          <div className="text-left mt-3">
             <Link to="/">
               <span className="text-primary">or get back to contacts</span>
             </Link>

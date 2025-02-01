@@ -11,7 +11,7 @@ export const AddContact = () => {
     phone: "",
     address: ""
   });
-  const navigate = useNavigate();
+  const navigate = useNavigate();// Navegación programática en React Router DOM 
   const { id } = useParams(); // Obtener el ID del contacto
 
   useEffect(() => {
@@ -101,7 +101,7 @@ export const AddContact = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group ">
           <label htmlFor="address">Address</label>
           <input
             type="text"
@@ -146,7 +146,7 @@ export const AddContact = () => {
       </form>
       <div className="text-left">
         <Link to="/">
-          <span className="text-primary">or get back to contacts</span>
+          <span className="text-primary">AddContacor get back to contacts </span>
         </Link>
       </div>
     </div>

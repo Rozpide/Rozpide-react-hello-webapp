@@ -20,76 +20,72 @@ const ContactCard = ({ contact, onSave, onDelete }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave(editableContact).then(() => {
-      navigate("/");
-    });
+    onSave(editableContact).then(() => navigate("/"));
   };
 
   return (
-    <div className="card mb-3">
-      <div className="card-body">
-        <form onSubmit={handleSubmit}>
-          <div className="form-group mb-3">
-            <label htmlFor="name">Full Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              placeholder="Full Name"
-              value={editableContact.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              placeholder="Enter email"
-              value={editableContact.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label htmlFor="phone">Phone</label>
-            <input
-              type="text"
-              className="form-control"
-              id="phone"
-              name="phone"
-              placeholder="Enter phone"
-              value={editableContact.phone}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label htmlFor="address">Address</label>
-            <input
-              type="text"
-              className="form-control"
-              id="address"
-              name="address"
-              placeholder="Enter address"
-              value={editableContact.address}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary w-100 mb-3">
-            Save
-          </button>
-        </form>
-        <div className="text-left">
-          <Link to="/">
-            <span className="text-primary">or get back to contacts</span>
-          </Link>
+    <div className="container mt-5">
+      <form onSubmit={handleSubmit}>
+        <div className="form-group ">
+          <label htmlFor="name">Full Name</label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            name="name"
+            placeholder="Full Name"
+            value={editableContact.name}
+            onChange={handleChange}
+            required
+          />
         </div>
+        <div className="form-group ">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+            value={editableContact.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="phone">Phone</label>
+          <input
+            type="text"
+            className="form-control"
+            id="phone"
+            name="phone"
+            placeholder="Enter phone"
+            value={editableContact.phone}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group ">
+          <label htmlFor="address">Address</label>
+          <input
+            type="text"
+            className="form-control"
+            id="address"
+            name="address"
+            placeholder="Enter address"
+            value={editableContact.address}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary w-100 mb-3">
+          Save
+        </button>
+      </form>
+      <div className="text-left">
+        <Link to="/">
+          <span className="text-primary">or get back to contacts hay que joderse</span>
+        </Link>
       </div>
     </div>
   );
