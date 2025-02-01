@@ -146,7 +146,7 @@ export const AddContact = () => {
       </form>
       <div className="text-left">
         <Link to="/">
-          <span className="text-primary">AddContacor get back to contacts </span>
+          <span className="text-primary">AddContacor get back to contacts Este es el que funciona AddContact</span>
         </Link>
       </div>
     </div>

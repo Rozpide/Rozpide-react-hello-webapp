@@ -10,7 +10,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import ContactCard from "./component/ContactCard";
+import ContactCard from "./component/ContactCard.js";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -22,6 +22,7 @@ const Layout = () => {
           {/*<Navbar />*/}
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/contact-card" element={<ContactCard />} />
             <Route path="/demo" element={<Demo />} />
             <Route path="/single/:theid" element={<Single />} />
             <Route path="/add-contact" element={<AddContact />} />

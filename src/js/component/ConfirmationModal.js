@@ -10,10 +10,10 @@ const ConfirmationModal = ({ show, handleClose, handleConfirm }) => {
       <Modal.Body>Are you sure you want to delete this contact?</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
-          Yes Baby!!
+          Oh Noo!!
         </Button>
         <Button variant="primary" onClick={handleConfirm}>
-          Oh No!!
+          Yes baby!!
         </Button>
       </Modal.Footer>
     </Modal>
