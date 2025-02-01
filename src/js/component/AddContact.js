@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
 
 export const AddContact = () => {
-  const { actions } = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [contact, setContact] = useState({
     name: "",
     email: "",
@@ -15,33 +15,17 @@ export const AddContact = () => {
 
   useEffect(() => {
     if (id) {
-      fetch(`https://playground.4geeks.com/contact/agendas/AgendaRozpide/contacts/${id}`)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Error al cargar contacto: " + response.statusText);
-          }
-        })
-        .then(data => {
-          if (data && data.name) {
-            setContact({
-              name: data.name,
-              email: data.email,
-              phone: data.phone,
-              address: data.address
-            });
-          } else {
-            throw new Error("Formato de datos del contacto no válido");
-          }
-        })
-        .catch(error => {
-          console.error("Error al cargar el contacto", error);
-          alert("Hubo un problema al cargar los datos del contacto.");
-          navigate("/");
-        });
+      // Intentar encontrar el contacto en el store si existe
+      const existingContact = store.contacts.find(contact => contact.id === parseInt(id));
+      if (existingContact) {
+        setContact(existingContact);
+      } else {
+        console.error("Contacto no encontrado");
+        alert("El contacto no existe.");
+        navigate("/");
+      }
     }
-  }, [id, navigate]);
+  }, [id, store.contacts, navigate]);
 
   const handleChange = (e) => {
     setContact({

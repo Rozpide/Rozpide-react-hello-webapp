@@ -53,7 +53,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(contactoActualizado),
+          body: JSON.stringify({
+            name: contactoActualizado.name,
+            phone: contactoActualizado.phone,
+            email: contactoActualizado.email,
+            address: contactoActualizado.address
+          }),
         })
           .then(response => {
             if (response.ok) {
